@@ -14,51 +14,53 @@ namespace LostInTheWoods
 {
     public partial class theWoods : Form
     {
-        int storyProgress; 
-        int progressSave;
-        int buttonPressNumber;
-        int drinkInterger = 0;
-        Random randGen = new Random();       
+
+        // Fred Hammerl
+        // Nov. 7, 2018
+        // This is the code for the adventure game
+        int storyProgress; //this int tracks story progress
+        int buttonPressNumber; //this int makes sure you can't mess up the story
+        Random randGen = new Random(); //this just randomly generates a number
 
         public theWoods()
         {
             InitializeComponent();
         }
 
-        private void startButton_Click(object sender, EventArgs e)
+        private void startButton_Click(object sender, EventArgs e) //button thing
         {
-            storyLabel.Text = "Go Through The Forest?";
-            startButton.Visible = false;
+            storyLabel.Text = "Go Through The Forest?"; //starts the story
+            startButton.Visible = false; //changes the visibility of the buttons
             noButton.Visible = true;
             yesButton.Visible = true;
-            imageLabel.Image = LostInTheWoods.Properties.Resources.Forest;
-            instuctions.Visible = false;
+            imageLabel.Image = LostInTheWoods.Properties.Resources.Forest; //changes the image displayed
+            instuctions.Visible = false; //changes the visibility of the instructions
         }
 
         private void yesButton_Click(object sender, EventArgs e)
         {
-            if (buttonPressNumber == 0)
+            if (buttonPressNumber == 0) //checks to see if a button has already been pressed. if 
             {
-            storyProgress = storyProgress + 2;
+            storyProgress = storyProgress + 2; //this will only work if the button hasn't been pressed
             progressButton.Visible = true;
             }
             else
             {
-                warningLabel.Text = "Please Press Continue";
+                warningLabel.Text = "Please Press Continue"; //this message shows up when you make a decision after you've already made one
             }
-            buttonPressNumber++;
+            buttonPressNumber++; //this adds to the int to make sure you can't add or subtract from the story
         }
 
         private void noButton_Click(object sender, EventArgs e)
         {
-            if (buttonPressNumber == 0)
+            if (buttonPressNumber == 0) //basically the same as the yes button
             {
             storyProgress = storyProgress - 1;
             progressButton.Visible = true;
             }
             else
             {
-                warningLabel.Text = "Please Press Continue";
+                warningLabel.Text = "Please Press Continue"; //writes a warning
             }
             buttonPressNumber++;
             
@@ -66,13 +68,13 @@ namespace LostInTheWoods
 
         private void progressButton_Click(object sender, EventArgs e)
         {  
-            int randomStuff = randGen.Next(1, 11);
+            int randomStuff = randGen.Next(1, 11); //selects a random number
 
-            switch(storyProgress)
+            switch(storyProgress) // Checks the storyProgress int and compares it to the case it corresponds with
             {
-                case 0:
-                    storyLabel.Text = "You avoid the rest of the forest and stop \nby a fast food franchise. Which?";
-                    yesButton.Visible = false;
+                case 0: //if the storyProgress int equals this case, it'll do what's listed below until the break
+                    storyLabel.Text = "You avoid the rest of the forest and stop \nby a fast food franchise. Which?"; //changes the text displayed where the story is
+                    yesButton.Visible = false; //switches buttons' visibility
                     noButton.Visible = false;
                     mcdonaldsButton.Visible = true;
                     tecobellButton.Visible = true;
@@ -80,7 +82,7 @@ namespace LostInTheWoods
                     endButton.Visible = false;
                     popeyesButton.Visible = true;
                     kfcButton.Visible = true;
-                    imageLabel.Image = null;
+                    imageLabel.Image = null; //makes the image null
                     break;
                 case -1:
                     storyLabel.Text = "You avoid the rest of the forest and stop \nby a fast food franchise. Which?";
@@ -103,7 +105,7 @@ namespace LostInTheWoods
                     kfcButton.Visible = false;
                     endButton.Visible = true;
                     resetButton.Visible = true;
-                    imageLabel.Image = LostInTheWoods.Properties.Resources.Mcdownload;
+                    imageLabel.Image = LostInTheWoods.Properties.Resources.Mcdownload; //changes the image box to the image listed
                     break;
                 case 101:
                     storyLabel.Text = "You order a taco. It's okay, you guess.\nYOU WIN.";
@@ -188,7 +190,7 @@ namespace LostInTheWoods
                     imageLabel.Image = LostInTheWoods.Properties.Resources.BBEAR;
                     break;
                 case 80:
-                    if (randomStuff <= 4)
+                    if (randomStuff <= 4) //checks the random number and if it meets the requirements to the left, it'll do what's in the brackets
                     {
                         storyLabel.Text = "The bear gets to you before you get the gun. \nDo You Want To Continue?";
                         gunButton.Visible = false;
@@ -196,10 +198,10 @@ namespace LostInTheWoods
                         checkButton.Visible = false;
                         yesButton.Visible = true;
                         noButton.Visible = true;
-                        storyProgress = 70;
+                        storyProgress = 70; //sets the int storyProgress to the number
                         imageLabel.Image = LostInTheWoods.Properties.Resources.BearWithGun;
                     }
-                    else
+                    else //the stuff below is what happens when the requirements of the if statement above aren't met
                     {
                         storyLabel.Text = "You get the gun. \nDo You Shoot?";
                         gunButton.Visible = false;
@@ -259,7 +261,7 @@ namespace LostInTheWoods
                 case 82:
                     storyLabel.Text = "The bear dies. Though it's not hunting season.\nThe fuzz already all over you.\nDo you resist arrest?";
                     imageLabel.Image = LostInTheWoods.Properties.Resources.Bear1;
-                    Thread.Sleep(999);
+                    Thread.Sleep(3000); //makes the programme wait
                     imageLabel.Image = LostInTheWoods.Properties.Resources.Police;
                     storyProgress = 84;
                     break;
@@ -296,9 +298,8 @@ namespace LostInTheWoods
                     noButton.Visible = false;
                     break;
             }
-            buttonPressNumber = 0;
-            warningLabel.Text = "";
-            progressSave = storyProgress;
+            buttonPressNumber = 0; // resets the buttonPressNumber so you can make a desicions for the new question
+            warningLabel.Text = ""; // gets rid of the warning
             progressButton.Visible = false;
         }
 
@@ -336,29 +337,23 @@ namespace LostInTheWoods
         {
             storyProgress = 80;
             progressButton.Visible = true;
-            progressSave = 0;
         }
 
         private void runButton_Click(object sender, EventArgs e)
         {
             storyProgress = 71;
             progressButton.Visible = true;
-            progressSave = 0;
-            drinkInterger = drinkInterger + 1;
         }
 
         private void checkButton_Click(object sender, EventArgs e)
         {
             storyProgress = 74;
             progressButton.Visible = true;
-            progressSave = 0;
-            drinkInterger = drinkInterger + 1;
         }
 
-        private void resetButton_Click(object sender, EventArgs e)
+        private void resetButton_Click(object sender, EventArgs e) //resets everything
         {
             storyProgress = 0;
-            progressSave = 0;
             mcdonaldsButton.Visible = false;
             tecobellButton.Visible = false;
             harveysButton.Visible = false;
@@ -374,7 +369,7 @@ namespace LostInTheWoods
         }
         private void endButton_Click(object sender, EventArgs e)
         {
-            Close();
+            Close(); //ends the programme
         }
     }
 }
