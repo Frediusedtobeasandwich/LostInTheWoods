@@ -14,7 +14,7 @@ namespace LostInTheWoods
 {
     public partial class theWoods : Form
     {
-        int storyProgress;
+        int storyProgress; 
         int progressSave;
         int buttonPressNumber;
         int drinkInterger = 0;
